@@ -15,10 +15,10 @@ static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
 static int user_bh            = 20;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
 static int focusonwheel       = 0;
-static char font-1[]            = "monospace:size=10";
-static char font-2[]            = "";
-static char font-3[]            = "";
-static const char *fonts[]          = { font-1, font-2, font-3 };
+static char font1[]            = "monospace:size=10";
+static char font2[]            = "";
+static char font3[]            = "";
+static const char *fonts[]          = { font1, font2, font3 };
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
@@ -37,16 +37,16 @@ static int statmonval = 0;
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
-static char tagsalt-1[] = { "1" };
-static char tagsalt-2[] = { "2" };
-static char tagsalt-3[] = { "3" };
-static char tagsalt-4[] = { "4" };
-static char tagsalt-5[] = { "5" };
-static char tagsalt-6[] = { "6" };
-static char tagsalt-7[] = { "7" };
-static char tagsalt-8[] = { "8" };
-static char tagsalt-9[] = { "9" };
-static const char *tagsalt[] = { tagsalt-1, tagsalt-2, tagsalt-3, tagsalt-4, tagsalt-5, tagsalt-6, tagsalt-7, tagsalt-8, tagsalt-9 };
+static char tagsalt1[] = { "1" };
+static char tagsalt2[] = { "2" };
+static char tagsalt3[] = { "3" };
+static char tagsalt4[] = { "4" };
+static char tagsalt5[] = { "5" };
+static char tagsalt6[] = { "6" };
+static char tagsalt7[] = { "7" };
+static char tagsalt8[] = { "8" };
+static char tagsalt9[] = { "9" };
+static const char *tagsalt[] = { tagsalt1, tagsalt2, tagsalt3, tagsalt4, tagsalt5, tagsalt6, tagsalt7, tagsalt8, tagsalt9 };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -94,9 +94,9 @@ static const Layout layouts[] = {
  * Xresources preferences to load at startup
  */
 ResourcePref resources[] = {
-		{ "font-1",             STRING,  &font-1 },
-		{ "font-2",             STRING,  &font-2 },
-		{ "font-3",             STRING,  &font-3 },
+		{ "font1",              STRING,  &font1 },
+		{ "font2",			    STRING,  &font2 },
+		{ "font3",			    STRING,  &font3 },
 		{ "normbgcolor",        STRING,  &normbgcolor },
 		{ "normbordercolor",    STRING,  &normbordercolor },
 		{ "normfgcolor",        STRING,  &normfgcolor },
@@ -115,20 +115,20 @@ ResourcePref resources[] = {
 		{ "resizehints",       	INTEGER, &resizehints },
 		{ "decorhints",       	INTEGER, &decorhints},
 		{ "mfact",      	 	FLOAT,   &mfact },
-		{ "systraypinning"		INTEGER, &systraypinning },
-		{ "systrayonleft"		INTEGER, &systrayonleft},
-		{ "systrayspacing"		INTEGER, &systrayspacing},
-		{ "systraypinningfailfirst" INTEGER, &systraypinningfailfirst},
-		{ "showsystray"			INTEGER, &showsystray},
-		{ "tagsalt-1"			STRING, &tagsalt-1},
-		{ "tagsalt-2"			STRING, &tagsalt-2},
-		{ "tagsalt-3"			STRING, &tagsalt-3},
-		{ "tagsalt-4"			STRING, &tagsalt-4},
-		{ "tagsalt-5"			STRING, &tagsalt-5},
-		{ "tagsalt-6"			STRING, &tagsalt-6},
-		{ "tagsalt-7"			STRING, &tagsalt-7},
-		{ "tagsalt-8"			STRING, &tagsalt-8},
-		{ "tagsalt-9"			STRING, &tagsalt-9},
+		{ "systraypinning",		INTEGER, &systraypinning },
+		{ "systrayonleft",		INTEGER, &systrayonleft},
+		{ "systrayspacing",		INTEGER, &systrayspacing},
+		{ "systraypinningfailfirst", INTEGER, &systraypinningfailfirst},
+		{ "showsystray",		INTEGER, &showsystray},
+		{ "tagsalt1",			STRING, &tagsalt1},
+		{ "tagsalt2",			STRING, &tagsalt2},
+		{ "tagsalt3",			STRING, &tagsalt3},
+		{ "tagsalt4",			STRING, &tagsalt4},
+		{ "tagsalt5",			STRING, &tagsalt5},
+		{ "tagsalt6",			STRING, &tagsalt6},
+		{ "tagsalt7",			STRING, &tagsalt7},
+		{ "tagsalt8",			STRING, &tagsalt8},
+		{ "tagsalt9",			STRING, &tagsalt9},
 };
 
 static Key keys[] = {
