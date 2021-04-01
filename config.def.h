@@ -17,7 +17,7 @@ static const char *fonts[]          = { "monospace:pixelsize=12",
 
 static unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static unsigned int systrayonleft = 0;   	/* 0: systray in the right corner, >0: systray on left of status text */
-static unsigned int systrayspacing = 2;   /* systray spacing */
+static unsigned int systrayspacing = 0;   /* systray spacing */
 static int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static int showsystray        = 1;     /* 0 means no systray */
 
