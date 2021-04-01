@@ -6,29 +6,34 @@
 static unsigned int borderpx  = 2;        /* border pixel of windows */
 static int gappx     = 2;                 /* gaps between windows */
 static unsigned int snap      = 16;       /* snap pixel */
+static int showbar            = 1;        /* 0 means no bar */
+static int topbar             = 1;        /* 0 means bottom bar */
+static int user_bh            = 20;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
+static int focusonwheel       = 0;
+static const char *fonts[]          = { "monospace:pixelsize=12",
+										/*"Iosevka Medium Extended:pixelsize=12:antialias=true:autohint=true",*/
+										"Symbols Nerd Font:pixelsize=12:antialias=true:autohint=true",
+										"JoyPixels:pixelsize=12:antialias=true:autohint=true" };
+
 static unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static unsigned int systrayonleft = 0;   	/* 0: systray in the right corner, >0: systray on left of status text */
 static unsigned int systrayspacing = 2;   /* systray spacing */
 static int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static int showsystray        = 1;     /* 0 means no systray */
-static int showbar            = 1;        /* 0 means no bar */
-static int topbar             = 1;        /* 0 means bottom bar */
-static int user_bh            = 20;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
-static int focusonwheel       = 0;
-static char font1[]            = "monospace:size=10";
-static char font2[]            = "";
-static char font3[]            = "";
-static const char *fonts[]          = { font1, font2, font3 };
-static char normbgcolor[]           = "#222222";
-static char normbordercolor[]       = "#444444";
-static char normfgcolor[]           = "#bbbbbb";
-static char selfgcolor[]            = "#eeeeee";
-static char selbordercolor[]        = "#005577";
-static char selbgcolor[]            = "#005577";
+
+static char normbgcolor[]           = "#1a1a1a";
+static char normbordercolor[]       = "#555555";
+static char normfgcolor[]           = "#ffffff";
+static char selfgcolor[]            = "#ffffff";
+static char selbordercolor[]        = "#10a204";
+static char selbgcolor[]            = "#10a204";
+
 static char *colors[][3] = {
-       /*               fg           bg           border   */
-       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
-       [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
+	/*               fg           bg           border   */
+	/*               font,					   inactive window border */
+	[SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
+	/* current tag and current window font, top bar secound color, active window border */
+	[SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
 };
 
 /* staticstatus */
@@ -36,17 +41,7 @@ static int statmonval = 0;
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-
-static char tagsalt1[] = { "1" };
-static char tagsalt2[] = { "2" };
-static char tagsalt3[] = { "3" };
-static char tagsalt4[] = { "4" };
-static char tagsalt5[] = { "5" };
-static char tagsalt6[] = { "6" };
-static char tagsalt7[] = { "7" };
-static char tagsalt8[] = { "8" };
-static char tagsalt9[] = { "9" };
-static const char *tagsalt[] = { tagsalt1, tagsalt2, tagsalt3, tagsalt4, tagsalt5, tagsalt6, tagsalt7, tagsalt8, tagsalt9 };
+static const char *tagsalt[] = { "\uf015", "\ue795", "\ufa9e", "\ufc6e", "\uf0e0", "\uf15c", "\uf15c", "\uf023", "\uf001" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -60,7 +55,7 @@ static const Rule rules[] = {
 /* layout(s) */
 static float mfact     = 0.5; /* factor of master area size [0.05..0.95] */
 static int nmaster     = 1;    /* number of clients in master area */
-static int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+static int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 static int decorhints  = 1;    /* 1 means respect decoration hints */
 
 #include "fibonacci.c"
@@ -94,41 +89,12 @@ static const Layout layouts[] = {
  * Xresources preferences to load at startup
  */
 ResourcePref resources[] = {
-		{ "font1",              STRING,  &font1 },
-		{ "font2",			    STRING,  &font2 },
-		{ "font3",			    STRING,  &font3 },
 		{ "normbgcolor",        STRING,  &normbgcolor },
 		{ "normbordercolor",    STRING,  &normbordercolor },
 		{ "normfgcolor",        STRING,  &normfgcolor },
 		{ "selbgcolor",         STRING,  &selbgcolor },
 		{ "selbordercolor",     STRING,  &selbordercolor },
 		{ "selfgcolor",         STRING,  &selfgcolor },
-		{ "borderpx",          	INTEGER, &borderpx },
-		{ "gappx",          	INTEGER, &gappx },
-		{ "snap",          		INTEGER, &snap },
-		{ "showbar",          	INTEGER, &showbar },
-		{ "topbar",          	INTEGER, &topbar },
-		{ "user_bh",          	INTEGER, &user_bh },
-		{ "focusonwheel",       INTEGER, &focusonwheel },
-		{ "statmonval",			INTEGER, &statmonval },
-		{ "nmaster",          	INTEGER, &nmaster },
-		{ "resizehints",       	INTEGER, &resizehints },
-		{ "decorhints",       	INTEGER, &decorhints},
-		{ "mfact",      	 	FLOAT,   &mfact },
-		{ "systraypinning",		INTEGER, &systraypinning },
-		{ "systrayonleft",		INTEGER, &systrayonleft},
-		{ "systrayspacing",		INTEGER, &systrayspacing},
-		{ "systraypinningfailfirst", INTEGER, &systraypinningfailfirst},
-		{ "showsystray",		INTEGER, &showsystray},
-		{ "tagsalt1",			STRING, &tagsalt1},
-		{ "tagsalt2",			STRING, &tagsalt2},
-		{ "tagsalt3",			STRING, &tagsalt3},
-		{ "tagsalt4",			STRING, &tagsalt4},
-		{ "tagsalt5",			STRING, &tagsalt5},
-		{ "tagsalt6",			STRING, &tagsalt6},
-		{ "tagsalt7",			STRING, &tagsalt7},
-		{ "tagsalt8",			STRING, &tagsalt8},
-		{ "tagsalt9",			STRING, &tagsalt9},
 };
 
 static Key keys[] = {
