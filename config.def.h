@@ -15,7 +15,7 @@ static const char *fonts[]          = { "monospace:pixelsize=12",
 										"Symbols Nerd Font:pixelsize=12:antialias=true:autohint=true",
 										"JoyPixels:pixelsize=12:antialias=true:autohint=true" };
 
-static unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+static unsigned int systraypinning = 1;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static unsigned int systrayonleft = 0;   	/* 0: systray in the right corner, >0: systray on left of status text */
 static unsigned int systrayspacing = 0;   /* systray spacing */
 static int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
@@ -48,8 +48,8 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating canfocus   monitor */
-	{ "stalonetray", NULL,    NULL,       0,            1,         0,         -1 },
+	/* class      instance    title       tags mask     isfloating	monitor */
+	{ "stalonetray", NULL,    NULL,       0,            1,			-1 },
 };
 
 /* layout(s) */
