@@ -48,8 +48,8 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating	monitor */
-	{ "stalonetray", NULL,    NULL,       0,            1,			-1 },
+	/* class        instance        title       tags mask       isfloating      monitor */
+	{ "discord",    NULL,           NULL,       1,              0,			    1 },
 };
 
 /* layout(s) */
@@ -64,7 +64,7 @@ static const Layout layouts[] = {
 	/* symbol     arrange function */
  	{ "[\\]",     dwindle },	/* first entry is default */
  	{ "[@]",      spiral },
-	{ "[]=",      tile },    	
+	{ "[]=",      tile },
 	{ "[M]",      monocle },
 	{ "###",	  gaplessgrid },
 	{ "TTT",      bstack },
@@ -144,8 +144,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_w,	   tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_e,	   tagmon,         {.i = +1 } },
 	{ MODKEY,                       XK_a,      togglealttag,   {0} },
-	{ MODKEY|ControlMask,           XK_j,      pushdown,       {0} },
-	{ MODKEY|ControlMask,           XK_k,      pushup,         {0} },
+	{ MODKEY|ShiftMask,             XK_j,      pushdown,       {0} },
+	{ MODKEY|ShiftMask,             XK_k,      pushup,         {0} },
 	{ MODKEY,                       XK_minus,  setgaps,        {.i = -2 } },
 	{ MODKEY,                       XK_equal,  setgaps,        {.i = +2 } },
 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 2  } },
