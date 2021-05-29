@@ -13,7 +13,8 @@ static int focusonwheel       = 0;
 static const char *fonts[]          = { "monospace:pixelsize=12",
 										/*"Iosevka Medium Extended:pixelsize=12:antialias=true:autohint=true",*/
 										"Symbols Nerd Font:pixelsize=12:antialias=true:autohint=true",
-										"JoyPixels:pixelsize=12:antialias=true:autohint=true" };
+										"JoyPixels:pixelsize=12:antialias=true:autohint=true",
+                                        "Noto Emoji:pixelsize=12:antialias=true:autohint=true" };
 
 static unsigned int systraypinning = 1;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static unsigned int systrayonleft = 0;   	/* 0: systray in the right corner, >0: systray on left of status text */
